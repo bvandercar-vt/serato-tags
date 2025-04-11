@@ -1,4 +1,4 @@
-Fork of https://github.com/Holzhaus/serato-tags , which appears to be no longer maintained. Many updates added, including overall library tools.
+Fork of https://github.com/Holzhaus/serato-tags , which appears to be no longer maintained. Many updates added, including overall library database tools, and Crate parsing from https://github.com/sharst/seratopy.
 
 # Serato Tags
 
@@ -94,4 +94,48 @@ modify_cues(
         ],
     },
 )
+```
+
+### Crate details and adding a track
+
+```python
+from serato_tools.crate.crate import Crate
+
+crate = Crate('/Users/Username/Music/_Serato_/Subcrates/Techno.crate')
+
+print(crate)
+# OUTPUT:
+#
+# Crate containing 81 tracks:
+# Music/Techno/Adam Beyer - Space Date (Pleasurekraft Remix).mp3
+# Music/Techno/Adam Beyer - Your Mind (Will Clarke Remix).mp3
+# Music/Techno/Adam Beyer - Your Mind.mp3
+# Music/Techno/Alberto Ruiz - Expressor (Hell Driver Remix).mp3
+# ...
+
+crate.print_data()
+# OUTPUT:
+#
+# [   ('vrsn', '1.0/Serato ScratchLive Crate'),
+#     ('osrt', [('brev', b'\x00')]),
+#     ('ovct', [('tvcn', 'key'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'artist'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'song'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'bpm'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'playCount'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'length'), ('tvcw', '0')]),
+#     ('ovct', [('tvcn', 'added'), ('tvcw', '0')]),
+#     (   'otrk',
+#         [   (   'ptrk',
+#                 'Music/Techno/Adam Beyer - Space Date (Pleasurekraft Remix).mp3')]),
+#     (   'otrk',
+#         [   (   'ptrk',
+#                 'Music/Techno/Adam Beyer - Your Mind (Will Clarke Remix).mp3')]),
+#     ('otrk', [('ptrk', 'Music/Techno/Adam Beyer - Your Mind.mp3')]),
+# ...
+
+
+# Example: Add a track to the crate and save it as a new crate
+crate.add_track('/Users/Username/Music/Techno/T78 - Acid Lick.mp3')
+crate.save_to_file('/Users/Username/Music/Techno/New Crate.crate')
 ```
